@@ -1,0 +1,30 @@
+<a href="/groups"><button>Dashboard</button></a>
+<a href="/sessions/logout"><button>Logout</button></a>
+<h1><%= @group.name %></h1>
+
+
+<% if @group.user == current_user %>
+    <a href="/groups/destroy/<%=@group.id %>" title='Delete this Organization'><button>Delete</button></a>
+<% end %>
+
+<% if Member.where(user:current_user,group:@group.id).count == 0 %>
+    <a href="/members/join/<%=@group.id %>" title='Join this Organization'><button>Join</button></a>
+<% else %>
+    <a href="/members/unjoin/<%=@group.id %>" title='Un Join this Organization'><button>UnJoin</button></a>
+<% end %>
+<h3><%= @group.description %></h3>
+
+<h4>Created by: <%=@group.user.fullName %></h4>
+<h4>Members</h4>
+
+<% if @members %>
+    <table class='member'>        
+        <tbody>
+            <% @members.each do |member| %>
+                <tr>                    
+                    <td><%= member.user.fullName %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <% end %>

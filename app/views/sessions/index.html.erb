@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+     crossorigin="anonymous"> -->
+     <style>
+     .red {
+       color: red;
+     }
+     </style>
+
+
+  <title>Login/Registration</title>
+   </head>
+  <body>
+    <div class=" container col-6">
+      <h3> Register below</h3>
+      <% if flash[:alert] %>
+        <% flash[:alert].each do |error| %>
+          <p class="red">
+            <%= error %>
+          </p>
+          <% end %>
+            <% end %>
+              <div class="row">
+                <div class="col-6">
+                  <h1>Login</h1>
+                  <form action="/sessions" method="POST">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control" id="email" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" name='submit' class="btn btn-outline-primary btn-lg btn-block">Log In</button>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="col-6">
+                  <h1>Register</h1>
+                  <form action="/users" method="POST">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <div class="form-group">
+                      <input type="text" name="user[first_name]" class="form-control" id="first_name" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="user[last_name]" class="form-control" id="last_name" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="user[email]" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="user[password]" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="password_confirm" class="form-control" placeholder="Password Confirmation">
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" name="submit" class="btn btn-outline-primary btn-lg btn-block">Register</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+    </div>

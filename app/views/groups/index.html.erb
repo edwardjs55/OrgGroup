@@ -1,0 +1,49 @@
+<a href="/sessions/logout"><button>Logout</button></a>
+
+<h1>Hi, <%= current_user.fullName %>!</h1>
+
+<h3>Here are the Organizations you may join.</h3>
+
+    <% if @groups %>
+    <table class='groups'>        
+        <tbody>
+            <% @groups.each do |group| %>
+                <tr>                    
+                    <td><a href="/groups/<%=group.id %>" title='go to Organization Info page to Join'><%= group.name %></a></td> 
+                    <td>Members: <%=group.members.count %></td>
+                    <td><%= group.description %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <% end %>
+
+        <% if flash[:alert] %>
+            <% flash[:alert].each do |error| %>
+                <p class="red">
+                    <%= error %>
+                </p>
+            <% end %>
+        <% end %>
+
+        <form action="/groups" method="POST">
+            <h2>Create a new Organization</h2>
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <div class="form-group">
+                <label for="name">Org Name</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Organization">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" class="form-control" id="description" placeholder="Org Description ">
+            </div>
+            <div class="form-group">
+                <button type="submit" name='submit' class="btn btn-outline-primary btn-lg btn-block">Create</button>
+            </div>
+        </form>
+        <br>
+
+
+
+
